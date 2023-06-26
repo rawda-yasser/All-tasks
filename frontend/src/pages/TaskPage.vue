@@ -12,6 +12,10 @@ const uncompletedTasks = computed(() => tasks.value.filter((task) => !task.is_co
 const showToggleCompletedBtn = computed(
   () => uncompletedTasks.value.length > 0 && completedTasks.value.length > 0
 )
+const completedTasksIsEmpty = computed(
+  () => uncompletedTasks.value.length === 0 && completedTasks.value.length === 0
+)
+const showCompletedTasks = ref(false)
 </script>
 
 <template>
@@ -31,10 +35,15 @@ const showToggleCompletedBtn = computed(
           <Tasks :tasks="uncompletedTasks" />
           <!-- show toggle button -->
           <div class="text-center my-3" v-show="showToggleCompletedBtn">
-            <button class="btn btn-sm btn-secondary">Show Completed</button>
+            <button
+              class="btn btn-sm btn-secondary"
+              @click="showCompletedTasks = !showCompletedTasks"
+            >
+              Show Completed
+            </button>
           </div>
           <!-- show a list of completed tasks -->
-          <Tasks :tasks="completedTasks" />
+          <Tasks :tasks="completedTasks" v-show="showCompletedTasks" />
         </div>
       </div>
     </div>
