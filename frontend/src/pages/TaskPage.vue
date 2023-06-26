@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { allTasks } from '../http/task-api'
 import Tasks from '../components/tasks/Tasks.vue'
 const tasks = ref([])
@@ -7,6 +7,8 @@ onMounted(async () => {
   const { data } = await allTasks()
   tasks.value = data.data
 })
+const completedTasks = computed(() => tasks.value.filter((task) => task.is_completed))
+const uncompletedTasks = computed(() => tasks.value.filter((task) => !task.is_completed))
 </script>
 
 <template>
@@ -23,9 +25,11 @@ onMounted(async () => {
             />
           </div>
           <!-- List of uncompleted tasks -->
-          <Tasks :tasks="tasks" />
+          <Tasks :tasks="uncompletedTasks" />
           <!-- show toggle button -->
+
           <!-- show a list of completed tasks -->
+          <Tasks :tasks="completedTasks" />
         </div>
       </div>
     </div>
