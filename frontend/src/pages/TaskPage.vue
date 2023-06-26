@@ -40,7 +40,7 @@ const showCompletedTasks = ref(false)
               @click="showCompletedTasks = !showCompletedTasks"
             >
               <span v-if="!showCompletedTasks">Show Completed</span>
-              <span v-else>Show Uncompleted</span>
+              <span v-else>Hide Completed</span>
             </button>
           </div>
           <!-- show a list of completed tasks -->
