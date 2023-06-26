@@ -1,7 +1,12 @@
 <template>
   <li class="list-group-item py-3">
     <div class="d-flex justify-content-start align-items-center">
-      <input class="form-check-input mt-0" :class="completedClass" type="checkbox" />
+      <input
+        class="form-check-input mt-0"
+        :class="completedClass"
+        type="checkbox"
+        :checked="task.is_completed"
+      />
       <div
         class="ms-2 flex-grow-1"
         title="Double click the text to edit or remove"
