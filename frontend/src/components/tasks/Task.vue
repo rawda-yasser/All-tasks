@@ -5,6 +5,7 @@
         class="form-check-input mt-0"
         :class="completedClass"
         type="checkbox"
+        @change="markTaskCompleted"
         :checked="task.is_completed"
       />
       <div
@@ -18,8 +19,9 @@
             class="editable-task"
             type="text"
             v-focus
-            @keyup.esc="isEdit = false"
+            @keyup.esc="undo"
             @keyup.enter="updateTask"
+            v-model="editingTask"
           />
         </div>
         <span v-else>{{ task.title }}</span>
@@ -32,10 +34,11 @@
 <script setup>
 import { computed, ref } from 'vue'
 import TaskActions from './TaskActions.vue'
-const emit = defineEmits(['updated'])
+const emit = defineEmits(['updated', 'completed'])
 const props = defineProps({
   task: Object
 })
+const editingTask = ref(props.task.title)
 const completedClass = computed(() => (props.task.is_completed ? 'completed' : ''))
 const isEdit = ref(false)
 const vFocus = {
@@ -48,5 +51,17 @@ const updateTask = (event) => {
   }
   isEdit.value = false
   emit('updated', updatedTask)
+}
+const markTaskCompleted = () => {
+  const updatedTask = {
+    ...props.task,
+    is_completed: !props.task.is_completed
+  }
+
+  emit('completed', updatedTask)
+}
+const undo = () => {
+  isEdit.value = false
+  editingTask.value = props.task.title
 }
 </script>

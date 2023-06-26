@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue'
-import { allTasks, createTask, updateTask } from '../http/task-api'
+import { allTasks, createTask, updateTask, completeTask } from '../http/task-api'
 import Tasks from '../components/tasks/Tasks.vue'
 import NewTask from '../components/tasks/NewTask.vue'
 const tasks = ref([])
@@ -22,13 +22,19 @@ const handleAddedTask = async (newTask) => {
   tasks.value.unshift(createdTask.data)
 }
 const handleUpdatedTask = async (task) => {
-  
   const { data: updatedTask } = await updateTask(task.id, {
     title: task.title
   })
 
   const currentTask = tasks.value.find((item) => item.id === task.id)
   currentTask.title = updatedTask.data.title
+}
+const handleCompletedTask = async (task) => {
+  const { data: updatedTask } = await completeTask(task.id, {
+    is_completed: task.is_completed
+  })
+  const currentTask = tasks.value.find((item) => item.id === task.id)
+  currentTask.is_completed = updatedTask.data.is_completed
 }
 </script>
 
@@ -40,7 +46,11 @@ const handleUpdatedTask = async (task) => {
           <!-- Add new Task -->
           <NewTask @added="handleAddedTask" />
           <!-- List of uncompleted tasks -->
-          <Tasks :tasks="uncompletedTasks" @updated="handleUpdatedTask" />
+          <Tasks
+            :tasks="uncompletedTasks"
+            @updated="handleUpdatedTask"
+            @completed="handleCompletedTask"
+          />
           <!-- show toggle button -->
           <div class="text-center my-3" v-show="showToggleCompletedBtn">
             <button
@@ -52,7 +62,12 @@ const handleUpdatedTask = async (task) => {
             </button>
           </div>
           <!-- show a list of completed tasks -->
-          <Tasks :tasks="completedTasks" v-show="showCompletedTasks" />
+          <Tasks
+            :tasks="completedTasks"
+            v-show="showCompletedTasks"
+            @updated="handleUpdatedTask"
+            @completed="handleCompletedTask"
+          />
         </div>
       </div>
     </div>
