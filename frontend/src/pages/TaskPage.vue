@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { allTasks } from '../http/task-api'
-import Task from '../components/tasks/Task.vue'
+import Tasks from '../components/tasks/Tasks.vue'
 const tasks = ref([])
 onMounted(async () => {
   const { data } = await allTasks()
@@ -22,12 +22,10 @@ onMounted(async () => {
               placeholder="+ Add new task. Press enter to save."
             />
           </div>
-          <!-- List of tasks -->
-          <div class="card mt-2">
-            <ul class="list-group list-group-flush" v-for="task in tasks" :key="task.id">
-              <Task :task="task" />
-            </ul>
-          </div>
+          <!-- List of uncompleted tasks -->
+          <Tasks :tasks="tasks" />
+          <!-- show toggle button -->
+          <!-- show a list of completed tasks -->
         </div>
       </div>
     </div>
