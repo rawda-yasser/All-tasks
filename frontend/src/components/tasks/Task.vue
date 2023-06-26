@@ -9,24 +9,29 @@
       />
       <div
         class="ms-2 flex-grow-1"
+        @dblclick="isEdit = true"
         title="Double click the text to edit or remove"
         :class="completedClass"
       >
-        <!-- <div class="relative">
-                                <input class="editable-task" type="text" />
-                            </div> -->
-        <span>{{ task.title }}</span>
+        <div class="relative" v-if="isEdit">
+          <input class="editable-task" type="text" v-focus @keyup.esc="isEdit = false" />
+        </div>
+        <span v-else>{{ task.title }}</span>
       </div>
       <!-- <div class="task-date">24 Feb 12:00</div> -->
-      <TaskActions />
+      <TaskActions @edit="isEdit = true" v-show="!isEdit" />
     </div>
   </li>
 </template>
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import TaskActions from './TaskActions.vue'
 const props = defineProps({
   task: Object
 })
 const completedClass = computed(() => (props.task.is_completed ? 'completed' : ''))
+const isEdit = ref(false)
+const vFocus = {
+  mounted: (el) => el.focus()
+}
 </script>
