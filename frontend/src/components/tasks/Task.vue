@@ -14,7 +14,13 @@
         :class="completedClass"
       >
         <div class="relative" v-if="isEdit">
-          <input class="editable-task" type="text" v-focus @keyup.esc="isEdit = false" />
+          <input
+            class="editable-task"
+            type="text"
+            v-focus
+            @keyup.esc="isEdit = false"
+            @keyup.enter="updateTask"
+          />
         </div>
         <span v-else>{{ task.title }}</span>
       </div>
@@ -26,6 +32,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import TaskActions from './TaskActions.vue'
+const emit = defineEmits(['updated'])
 const props = defineProps({
   task: Object
 })
@@ -33,5 +40,13 @@ const completedClass = computed(() => (props.task.is_completed ? 'completed' : '
 const isEdit = ref(false)
 const vFocus = {
   mounted: (el) => el.focus()
+}
+const updateTask = (event) => {
+  const updatedTask = {
+    ...props.task,
+    title: event.target.value
+  }
+  isEdit.value = false
+  emit('updated', updatedTask)
 }
 </script>
