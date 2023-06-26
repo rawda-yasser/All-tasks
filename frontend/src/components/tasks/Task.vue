@@ -18,21 +18,13 @@
         <span>{{ task.title }}</span>
       </div>
       <!-- <div class="task-date">24 Feb 12:00</div> -->
-    </div>
-    <div class="task-actions">
-      <button class="btn btn-sm btn-circle btn-outline-secondary me-1">
-        <EditIcon />
-      </button>
-      <button class="btn btn-sm btn-circle btn-outline-danger">
-        <DeleteIcon />
-      </button>
+      <TaskActions />
     </div>
   </li>
 </template>
 <script setup>
-import EditIcon from '../icons/EditIcon.vue'
-import DeleteIcon from '../icons/DeleteIcon.vue'
 import { computed } from 'vue'
+import TaskActions from './TaskActions.vue'
 const props = defineProps({
   task: Object
 })
