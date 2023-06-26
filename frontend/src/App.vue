@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+import Navbar from './components/Navbar.vue'
+</script>
 
 <template>
-  <h1>All Tasks</h1>
+  <Navbar />
 </template>
 
 <style scoped></style>
