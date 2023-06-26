@@ -1,3 +1,12 @@
+<script setup>
+import { onMounted } from 'vue'
+import api from '../http/api'
+onMounted(async () => {
+  const { data } = await api.get('/tasks')
+  console.log(data)
+})
+</script>
+
 <template>
   <main style="min-height: 50vh; margin-top: 2rem">
     <div class="container">
