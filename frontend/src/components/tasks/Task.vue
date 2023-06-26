@@ -27,14 +27,14 @@
         <span v-else>{{ task.title }}</span>
       </div>
       <!-- <div class="task-date">24 Feb 12:00</div> -->
-      <TaskActions @edit="isEdit = true" v-show="!isEdit" />
+      <TaskActions @edit="isEdit = true" v-show="!isEdit" @removed="deleteTask" />
     </div>
   </li>
 </template>
 <script setup>
 import { computed, ref } from 'vue'
 import TaskActions from './TaskActions.vue'
-const emit = defineEmits(['updated', 'completed'])
+const emit = defineEmits(['updated', 'completed', 'removed'])
 const props = defineProps({
   task: Object
 })
@@ -59,6 +59,11 @@ const markTaskCompleted = () => {
   }
 
   emit('completed', updatedTask)
+}
+const deleteTask = () => {
+  if (confirm('Are you sure?')) {
+    emit('removed', props.task)
+  }
 }
 const undo = () => {
   isEdit.value = false

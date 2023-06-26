@@ -11,7 +11,7 @@ const emit = defineEmits(['edit', 'remove'])
     >
       <EditIcon />
     </button>
-    <button class="btn btn-sm btn-circle btn-outline-danger" @click="($event) => emit('remove')">
+    <button class="btn btn-sm btn-circle btn-outline-danger" @click="($event) => emit('removed')">
       <DeleteIcon />
     </button>
   </div>

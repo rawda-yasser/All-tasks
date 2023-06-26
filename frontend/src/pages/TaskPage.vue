@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue'
-import { allTasks, createTask, updateTask, completeTask } from '../http/task-api'
+import { allTasks, createTask, updateTask, completeTask, removeTask } from '../http/task-api'
 import Tasks from '../components/tasks/Tasks.vue'
 import NewTask from '../components/tasks/NewTask.vue'
 const tasks = ref([])
@@ -36,6 +36,11 @@ const handleCompletedTask = async (task) => {
   const currentTask = tasks.value.find((item) => item.id === task.id)
   currentTask.is_completed = updatedTask.data.is_completed
 }
+const handleRemoveTask = async (task) => {
+  await removeTask(task.id)
+  const taskIndex = tasks.value.findIndex((item) => item.id === task.id)
+  tasks.value.splice(taskIndex, 1)
+}
 </script>
 
 <template>
@@ -50,6 +55,7 @@ const handleCompletedTask = async (task) => {
             :tasks="uncompletedTasks"
             @updated="handleUpdatedTask"
             @completed="handleCompletedTask"
+            @removed="handleRemoveTask"
           />
           <!-- show toggle button -->
           <div class="text-center my-3" v-show="showToggleCompletedBtn">
@@ -67,6 +73,7 @@ const handleCompletedTask = async (task) => {
             v-show="showCompletedTasks"
             @updated="handleUpdatedTask"
             @completed="handleCompletedTask"
+            @removed="handleRemoveTask"
           />
         </div>
       </div>
