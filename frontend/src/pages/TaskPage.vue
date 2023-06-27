@@ -6,6 +6,7 @@ import { storeToRefs } from 'pinia'
 import Tasks from '../components/tasks/Tasks.vue'
 import NewTask from '../components/tasks/NewTask.vue'
 const store = useTaskStore()
+const { fetchAllTasks } = store
 const { completedTasks, uncompletedTasks } = storeToRefs(store)
 // store.$patch({
 //   task: {
@@ -16,7 +17,7 @@ const { completedTasks, uncompletedTasks } = storeToRefs(store)
 const tasks = ref([])
 
 onMounted(async () => {
-  await store.fetchAllTasks()
+  await fetchAllTasks()
 })
 // const completedTasks = computed(() => tasks.value.filter((task) => task.is_completed))
 // const uncompletedTasks = computed(() => tasks.value.filter((task) => !task.is_completed))
