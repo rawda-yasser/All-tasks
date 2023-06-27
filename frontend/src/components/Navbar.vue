@@ -47,7 +47,8 @@
 </template>
 
 <style scoped>
-.nav-link.router-link-active {
+/* .nav-link.router-link-active {
   color: rgba(0, 0, 0, 0.9);
 }
 </style>
+*/
