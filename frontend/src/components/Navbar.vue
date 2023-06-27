@@ -19,11 +19,11 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <!-- <router-link :to="{ name: 'tasks' }" class="nav-link">Tasks</router-link> -->
+            <router-link :to="{ name: 'tasks' }" class="nav-link">Tasks</router-link>
             <!-- <a href="#" @click.prevent="$router.push('/tasks')" class="nav-link">Tasks</a> -->
           </li>
           <li class="nav-item">
-            <!-- <router-link :to="{ name: 'summary' }" class="nav-link">Summary</router-link> -->
+            <router-link :to="{ name: 'summary' }" class="nav-link">Summary</router-link>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
