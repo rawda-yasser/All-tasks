@@ -34,7 +34,8 @@
 <script setup>
 import { computed, ref } from 'vue'
 import TaskActions from './TaskActions.vue'
-const emit = defineEmits(['updated', 'completed', 'removed'])
+import { useTaskStore } from '../../stores/task'
+const { handleCompletedTask, handleRemoveTask, handleUpdatedTask } = useTaskStore()
 const props = defineProps({
   task: Object
 })
@@ -44,25 +45,25 @@ const isEdit = ref(false)
 const vFocus = {
   mounted: (el) => el.focus()
 }
-const updateTask = (event) => {
+const updateTask = async (event) => {
   const updatedTask = {
     ...props.task,
     title: event.target.value
   }
   isEdit.value = false
-  emit('updated', updatedTask)
+  await handleUpdatedTask(updatedTask)
 }
-const markTaskCompleted = () => {
+const markTaskCompleted = async () => {
   const updatedTask = {
     ...props.task,
     is_completed: !props.task.is_completed
   }
 
-  emit('completed', updatedTask)
+  await handleCompletedTask(updatedTask)
 }
-const deleteTask = () => {
+const deleteTask = async () => {
   if (confirm('Are you sure?')) {
-    emit('removed', props.task)
+    await handleRemoveTask(props.task)
   }
 }
 const undo = () => {

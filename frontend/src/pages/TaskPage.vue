@@ -29,26 +29,6 @@ const completedTasksIsEmpty = computed(
 )
 const showCompletedTasks = ref(false)
 
-const handleUpdatedTask = async (task) => {
-  const { data: updatedTask } = await updateTask(task.id, {
-    title: task.title
-  })
-
-  const currentTask = tasks.value.find((item) => item.id === task.id)
-  currentTask.title = updatedTask.data.title
-}
-const handleCompletedTask = async (task) => {
-  const { data: updatedTask } = await completeTask(task.id, {
-    is_completed: task.is_completed
-  })
-  const currentTask = tasks.value.find((item) => item.id === task.id)
-  currentTask.is_completed = updatedTask.data.is_completed
-}
-const handleRemoveTask = async (task) => {
-  await removeTask(task.id)
-  const taskIndex = tasks.value.findIndex((item) => item.id === task.id)
-  tasks.value.splice(taskIndex, 1)
-}
 </script>
 
 <template>
