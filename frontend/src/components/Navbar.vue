@@ -45,10 +45,3 @@
     </div>
   </nav>
 </template>
-
-<style scoped>
-/* .nav-link.router-link-active {
-  color: rgba(0, 0, 0, 0.9);
-}
-</style>
-*/
