@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue'
-import { allTasks, createTask, updateTask, completeTask, removeTask } from '../http/task-api'
 import { useTaskStore } from '../stores/task'
 import { storeToRefs } from 'pinia'
 import Tasks from '../components/tasks/Tasks.vue'
@@ -28,7 +27,6 @@ const completedTasksIsEmpty = computed(
   () => uncompletedTasks.value.length === 0 && completedTasks.value.length === 0
 )
 const showCompletedTasks = ref(false)
-
 </script>
 
 <template>

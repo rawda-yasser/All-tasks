@@ -1,18 +1,7 @@
 import { defineStore } from 'pinia'
 import { allTasks, completeTask, createTask, removeTask, updateTask } from '../http/task-api'
-import { reactive, ref, computed } from 'vue'
-const tmp = {
-  state: () => ({
-    tasks: [],
-    task: {
-      id: 1,
-      title: 'First Task',
-      is_completed: false
-    }
-  }),
-  getters: {},
-  actions: {}
-}
+import { ref, computed } from 'vue'
+
 export const useTaskStore = defineStore('taskStore', () => {
   const tasks = ref([])
 
