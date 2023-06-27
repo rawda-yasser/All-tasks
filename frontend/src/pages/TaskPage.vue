@@ -57,7 +57,7 @@ const handleRemoveTask = async (task) => {
       <div class="row">
         <div class="col-md-8 offset-md-2">
           <!-- Add new Task -->
-          <NewTask @added="handleAddedTask" />
+          <NewTask />
           <!-- List of uncompleted tasks -->
           <Tasks
             :tasks="uncompletedTasks"
