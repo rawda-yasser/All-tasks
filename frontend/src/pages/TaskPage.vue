@@ -20,6 +20,8 @@ onMounted(async () => {
   tasks.value = data.data
   // console.log(task.value)
   console.log(store.completed)
+  console.log(store.uncompleted)
+  console.log(store.uncompletedCount)
 })
 const completedTasks = computed(() => tasks.value.filter((task) => task.is_completed))
 const uncompletedTasks = computed(() => tasks.value.filter((task) => !task.is_completed))
