@@ -6,11 +6,11 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 
-const router = useRouter()
+// const router = useRouter()
 
-const handleClick = () => {
-  router.push({ name: 'tasks' })
-}
+// const handleClick = () => {
+//   router.push({ name: 'tasks' })
+// }
 </script>
