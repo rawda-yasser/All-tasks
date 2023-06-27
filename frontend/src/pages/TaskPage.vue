@@ -6,7 +6,7 @@ import { storeToRefs } from 'pinia'
 import Tasks from '../components/tasks/Tasks.vue'
 import NewTask from '../components/tasks/NewTask.vue'
 const store = useTaskStore()
-const { fetchAllTasks, handleAddedTask } = store
+const { fetchAllTasks } = store
 const { completedTasks, uncompletedTasks } = storeToRefs(store)
 // store.$patch({
 //   task: {
