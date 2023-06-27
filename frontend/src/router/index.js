@@ -5,7 +5,8 @@ const router = createRouter({
   history: createWebHistory(),
   linkActiveClass: 'active'
 })
-router.beforeEach(() => {
-  console.log('Global before each')
+router.beforeEach((to, from) => {
+  console.log('Global before each', to, from)
+  if (to.name === 'tasks') return { name: 'login' }
 })
 export default router
