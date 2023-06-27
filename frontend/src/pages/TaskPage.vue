@@ -5,7 +5,12 @@ import { useTaskStore } from '../stores/task'
 import Tasks from '../components/tasks/Tasks.vue'
 import NewTask from '../components/tasks/NewTask.vue'
 const store = useTaskStore()
-store.task.title = 'First task updated'
+store.$patch({
+  task: {
+    title: 'Task updated',
+    is_completed: true
+  }
+})
 const tasks = ref([])
 
 onMounted(async () => {
