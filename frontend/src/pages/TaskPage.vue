@@ -18,7 +18,8 @@ const tasks = ref([])
 onMounted(async () => {
   const { data } = await allTasks()
   tasks.value = data.data
-  console.log(task.value)
+  // console.log(task.value)
+  console.log(store.completed)
 })
 const completedTasks = computed(() => tasks.value.filter((task) => task.is_completed))
 const uncompletedTasks = computed(() => tasks.value.filter((task) => !task.is_completed))
