@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { allTasks } from '../http/task-api'
 export const useTaskStore = defineStore('taskStore', {
   state: () => ({
     tasks: [],
@@ -15,19 +16,9 @@ export const useTaskStore = defineStore('taskStore', {
     }
   },
   actions: {
-    fetchAllTasks() {
-      this.tasks = [
-        {
-          id: 1,
-          title: 'First Task',
-          is_completed: false
-        },
-        {
-          id: 2,
-          title: 'Second Task',
-          is_completed: true
-        }
-      ]
+    async fetchAllTasks() {
+      const { data } = await allTasks()
+      this.tasks = data.data
     }
   }
 })
