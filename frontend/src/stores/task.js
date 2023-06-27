@@ -20,8 +20,8 @@ export const useTaskStore = defineStore('taskStore', {
     }
   }),
   getters: {
-    completed: (state) => state.tasks.filter((task) => task.is_completed),
-    uncompleted() {
+    completedTasks: (state) => state.tasks.filter((task) => task.is_completed),
+    uncompletedTasks() {
       return this.tasks.filter((task) => !task.is_completed)
     }
   }
