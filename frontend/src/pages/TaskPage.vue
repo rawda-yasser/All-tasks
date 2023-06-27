@@ -37,12 +37,7 @@ const showCompletedTasks = ref(false)
           <!-- Add new Task -->
           <NewTask />
           <!-- List of uncompleted tasks -->
-          <Tasks
-            :tasks="uncompletedTasks"
-            @updated="handleUpdatedTask"
-            @completed="handleCompletedTask"
-            @removed="handleRemoveTask"
-          />
+          <Tasks :tasks="uncompletedTasks" />
           <!-- show toggle button -->
           <div class="text-center my-3" v-show="showToggleCompletedBtn">
             <button
@@ -54,13 +49,7 @@ const showCompletedTasks = ref(false)
             </button>
           </div>
           <!-- show a list of completed tasks -->
-          <Tasks
-            :tasks="completedTasks"
-            v-show="showCompletedTasks"
-            @updated="handleUpdatedTask"
-            @completed="handleCompletedTask"
-            @removed="handleRemoveTask"
-          />
+          <Tasks :tasks="completedTasks" v-show="showCompletedTasks" />
         </div>
       </div>
     </div>
