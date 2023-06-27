@@ -23,9 +23,6 @@ export const useTaskStore = defineStore('taskStore', {
     completed: (state) => state.tasks.filter((task) => task.is_completed),
     uncompleted() {
       return this.tasks.filter((task) => !task.is_completed)
-    },
-    uncompletedCount() {
-      return this.uncompleted.length
     }
   }
 })
