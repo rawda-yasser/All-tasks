@@ -1,12 +1,17 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue'
 import { allTasks, createTask, updateTask, completeTask, removeTask } from '../http/task-api'
+import { useTaskStore } from '../stores/task'
 import Tasks from '../components/tasks/Tasks.vue'
 import NewTask from '../components/tasks/NewTask.vue'
+const store = useTaskStore()
+store.task.title = 'First task updated'
 const tasks = ref([])
+
 onMounted(async () => {
   const { data } = await allTasks()
   tasks.value = data.data
+  console.log(store.task)
 })
 const completedTasks = computed(() => tasks.value.filter((task) => task.is_completed))
 const uncompletedTasks = computed(() => tasks.value.filter((task) => !task.is_completed))
