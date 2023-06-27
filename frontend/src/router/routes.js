@@ -2,6 +2,7 @@ import TaskPage from '../pages/TaskPage.vue'
 import LoginPage from '../pages/LoginPage.vue'
 import RegisterPage from '../pages/RegisterPage.vue'
 import SummaryPage from '../pages/SummaryPage.vue'
+import NotFoundErrorPage from '../pages/errors/NotFoundErrorPage.vue'
 const routes = [
   {
     path: '/',
@@ -22,6 +23,11 @@ const routes = [
     path: '/summary',
     component: SummaryPage,
     name: 'summary'
+  },
+  {
+    path: '/:notFound(.*)',
+    component: NotFoundErrorPage,
+    name: 'notFound'
   }
 ]
 export default routes
